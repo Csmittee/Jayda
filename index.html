@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Happy 11th Birthday, Jayda! 🎀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #ffe6f0 0%, #ffb3c6 100%);
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Poppins', cursive;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        /* main card container */
+        .birthday-card {
+            max-width: 550px;
+            width: 100%;
+            margin: 2rem auto;
+            background: rgba(255, 250, 240, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 4rem 3rem 4rem 3rem;
+            box-shadow: 0 30px 40px rgba(255, 105, 180, 0.3), 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 1.8rem 1.5rem 2.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 215, 225, 0.8);
+        }
+
+        /* hero video styling */
+        .hero-video {
+            width: 100%;
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 30px rgba(255, 80, 120, 0.25);
+            margin-bottom: 1.5rem;
+            border: 3px solid white;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+            background: #f9c7d4;
+        }
+
+        /* title area */
+        .birthday-title {
+            text-align: center;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .birthday-title h1 {
+            font-size: 2.6rem;
+            background: linear-gradient(135deg, #ff99cc, #ff3388);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 4px 12px #ffb3d9;
+            letter-spacing: -0.5px;
+            word-break: keep-all;
+        }
+
+        .age-badge {
+            display: inline-block;
+            background: #ff80b3;
+            color: white;
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 8px #ffb3c6;
+        }
+
+        .wish-message {
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 1rem 0 0.8rem;
+            background: #fff0f5;
+            padding: 0.9rem;
+            border-radius: 40px;
+            color: #c43a6b;
+            font-weight: 600;
+            border: 1px solid #ffbfd5;
+        }
+
+        /* second video (moments) */
+        .memory-video {
+            width: 100%;
+            border-radius: 2rem;
+            margin: 1.2rem 0;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ffe2ed;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+        }
+
+        /* gift box section */
+        .gift-section {
+            background: #fff6f9;
+            border-radius: 2.5rem;
+            padding: 1.4rem;
+            margin: 1.8rem 0 0.8rem;
+            text-align: center;
+            box-shadow: inset 0 1px 4px #ffc0d0, 0 8px 20px rgba(255, 100, 130, 0.2);
+        }
+
+        .gift-box {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .gift-box svg {
+            filter: drop-shadow(0 12px 15px rgba(0, 0, 0, 0.2));
+            transition: all 0.2s;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-box:active {
+            transform: scale(0.96);
+        }
+
+        .cta-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            background: #ffd1e0;
+            display: inline-block;
+            padding: 0.4rem 1.5rem;
+            border-radius: 40px;
+            margin-top: 0.8rem;
+            color: #a12f54;
+            letter-spacing: 1px;
+        }
+
+        .open-hint {
+            font-size: 0.9rem;
+            color: #e66a9e;
+            margin-top: 0.6rem;
+            font-weight: 500;
+        }
+
+        /* secret gift video (hidden initially) */
+        .gift-reveal {
+            margin-top: 1.5rem;
+            border-radius: 2rem;
+            overflow: hidden;
+            display: none;
+            transition: all 0.4s ease;
+            border: 3px solid #ffb7cf;
+            background: #ffeef4;
+            padding: 0.2rem;
+        }
+
+        .gift-reveal video {
+            width: 100%;
+            border-radius: 1.6rem;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+            display: block;
+        }
+
+        .show-gift {
+            display: block;
+            animation: bouncePop 0.6s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+
+        @keyframes bouncePop {
+            0% {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.03);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff66aa;
+            position: absolute;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            margin-top: 1.8rem;
+            color: #e680a6;
+        }
+
+        button {
+            background: none;
+            border: none;
+        }
+
+        @media (max-width: 500px) {
+            .birthday-card {
+                padding: 1rem;
+            }
+            .birthday-title h1 {
+                font-size: 1.9rem;
+            }
+            .wish-message {
+                font-size: 1rem;
+            }
+            .cta-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="birthday-card">
+    <!-- Hero video: Happy Birthday Jayda -->
+    <video class="hero-video" autoplay muted playsinline loop>
+        <source src="https://res.cloudinary.com/dfiomi0lb/video/upload/q_auto/f_auto/v1775430432/IMG_0881.mp4" type="video/mp4">
+        Your browser does not support the video tag, but happy birthday anyway!
+    </video>
+
+    <div class="birthday-title">
+        <h1>🎂 Happy Birthday, my dear Jayda! 🎀</h1>
+        <div class="age-badge">✨ 11 years of amazing ✨</div>
+    </div>
+
+    <div class="wish-message">
+        🎈 Your 11th birthday! Wishing you the brightest joy, magic, and all the glitter in the world. 🎈
+    </div>
+
+    <!-- second video - daddy's gift message + memory clip -->
+    <video class="memory-video" controls playsinline preload="metadata">
+        <source src="https://res.cloudinary.com/dfiomi0lb/video/upload/q_auto/f_auto/v1775430476/IMG_2387.mov" type="video/mp4">
+    </video>
+
+    <div class="wish-message" style="background:#ffe0eb; margin-top: 0;">
+        💖 Daddy's special gift is hidden inside... 💖
+    </div>
+
+    <!-- Gift box section with animation + CTA -->
+    <div class="gift-section">
+        <div class="gift-box" id="giftBoxBtn">
+            <!-- animated gift box svg (colorful & playful) -->
+            <svg width="130" height="130" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="45" width="90" height="55" rx="10" fill="#FF69B4" stroke="#FF1493" stroke-width="2.5"/>
+                <rect x="10" y="40" width="100" height="12" rx="6" fill="#FFB6C1" stroke="#FF1493" stroke-width="2"/>
+                <path d="M60 20 L60 55" stroke="#FFB347" stroke-width="6" stroke-linecap="round"/>
+                <path d="M40 30 L80 30" stroke="#FFB347" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="35" cy="65" r="8" fill="#FFDD55" stroke="#FFA500" stroke-width="2"/>
+                <circle cx="85" cy="65" r="8" fill="#FFDD55" stroke="#FFA500" stroke-width="2"/>
+                <rect x="52" y="75" width="16" height="25" rx="4" fill="#FFA07A" stroke="#FF6347" stroke-width="2"/>
+                <path d="M45 98 L75 98" stroke="#FF69B4" stroke-width="3" stroke-linecap="round"/>
+                <polygon points="60,10 67,20 53,20" fill="#FFD966" stroke="#E6A817" stroke-width="1.5"/>
+            </svg>
+        </div>
+        <div class="cta-text">
+            🎁 CLICK TO OPEN YOUR GIFT 🎁
+        </div>
+        <div class="open-hint">
+            ✨ tap the gift box ✨
+        </div>
+    </div>
+
+    <!-- hidden gift video container (will appear after click) -->
+    <div id="giftVideoContainer" class="gift-reveal">
+        <video id="giftVideo" controls playsinline preload="auto">
+            <source src="https://res.cloudinary.com/dfiomi0lb/video/upload/q_auto/f_auto/v1775430518/IMG_2423_1.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <footer>
+        🎀 made with all my love, for Jayda — the most sparkling 11 year old 🎀
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // DOM elements
+        const giftBtn = document.getElementById('giftBoxBtn');
+        const giftContainer = document.getElementById('giftVideoContainer');
+        const giftVideo = document.getElementById('giftVideo');
+
+        // confetti effect function (playful, colorful)
+        function launchConfetti() {
+            // simple but joyful confetti using canvas + simple burst
+            // create canvas confetti on the fly if needed
+            const colors = ['#ff66b2', '#ff3388', '#ffcc00', '#ff9966', '#ff66cc', '#66ffcc', '#ff66ff', '#f9c7d4'];
+            for (let i = 0; i < 110; i++) {
+                const conf = document.createElement('div');
+                conf.classList.add('confetti');
+                const size = Math.random() * 10 + 5;
+                conf.style.width = size + 'px';
+                conf.style.height = size * 0.6 + 'px';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.position = 'fixed';
+                conf.style.left = Math.random() * window.innerWidth + 'px';
+                conf.style.top = '-20px';
+                conf.style.borderRadius = '40% 60% 70% 30%';
+                conf.style.opacity = '0.9';
+                conf.style.zIndex = '10000';
+                conf.style.pointerEvents = 'none';
+                document.body.appendChild(conf);
+                const endX = Math.random() * window.innerWidth;
+                const endY = window.innerHeight + 50;
+                const rot = Math.random() * 720;
+                conf.animate([
+                    { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translate(${endX - parseFloat(conf.style.left)}px, ${endY}px) rotate(${rot}deg)`, opacity: 0.3 }
+                ], {
+                    duration: 1200 + Math.random() * 700,
+                    easing: 'cubic-bezier(0.2, 0.9, 0.4, 1)',
+                    fill: 'forwards'
+                });
+                setTimeout(() => {
+                    if(conf.parentNode) conf.remove();
+                }, 1800);
+            }
+        }
+
+        // show gift video with animations & auto-play the video
+        function revealGift() {
+            // if already visible, just play video again
+            if (giftContainer.classList.contains('show-gift')) {
+                if (giftVideo) {
+                    giftVideo.currentTime = 0;
+                    giftVideo.play().catch(e => console.log("autoplay blocked, user must tap play"));
+                }
+                launchConfetti();
+                return;
+            }
+            // show the container with animation
+            giftContainer.classList.add('show-gift');
+            // scroll smoothly into view so Jayda sees the present
+            setTimeout(() => {
+                giftContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            // try to autoplay video (due to browser policies, we still try)
+            if (giftVideo) {
+                giftVideo.load();
+                giftVideo.play().catch(err => {
+                    // if autoplay fails, user can click play button - still functional
+                    console.log("autoplay blocked, but video is ready");
+                    // we still show big play button.
+                });
+            }
+            // extra confetti + joy
+            launchConfetti();
+            // also trigger another round of confetti after 0.4s
+            setTimeout(() => {
+                launchConfetti();
+            }, 350);
+            // optional: add extra sparkle message
+            const extraSpark = document.createElement('div');
+            extraSpark.innerText = '✨🎁 HAPPY BIRTHDAY JAYDA! 🎁✨';
+            extraSpark.style.position = 'fixed';
+            extraSpark.style.bottom = '20%';
+            extraSpark.style.left = '50%';
+            extraSpark.style.transform = 'translateX(-50%)';
+            extraSpark.style.background = '#ff99cc';
+            extraSpark.style.color = 'white';
+            extraSpark.style.padding = '0.6rem 1.4rem';
+            extraSpark.style.borderRadius = '40px';
+            extraSpark.style.fontWeight = 'bold';
+            extraSpark.style.fontSize = '1.2rem';
+            extraSpark.style.zIndex = '10001';
+            extraSpark.style.boxShadow = '0 4px 15px hotpink';
+            extraSpark.style.textAlign = 'center';
+            extraSpark.style.whiteSpace = 'nowrap';
+            extraSpark.style.fontFamily = 'inherit';
+            document.body.appendChild(extraSpark);
+            setTimeout(() => {
+                extraSpark.style.opacity = '0';
+                setTimeout(() => extraSpark.remove(), 800);
+            }, 1800);
+        }
+
+        // Event listener for gift box click (anywhere on the gift area)
+        if (giftBtn) {
+            giftBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                revealGift();
+            });
+        }
+
+        // also attach to the cta text for easier touch
+        const ctaDiv = document.querySelector('.cta-text');
+        if (ctaDiv) {
+            ctaDiv.addEventListener('click', () => {
+                revealGift();
+            });
+        }
+        // optional: gift-section click too
+        const giftSection = document.querySelector('.gift-section');
+        if (giftSection) {
+            giftSection.addEventListener('click', (e) => {
+                if (e.target === giftSection || e.target.closest('.gift-box') || e.target === ctaDiv) {
+                    // already handled
+                } else {
+                    // also allow section tap
+                    revealGift();
+                }
+            });
+        }
+
+        // preload background confetti fun - on page load, show mini sparkles for 0.5s
+        window.addEventListener('load', () => {
+            // tiny initial greeting
+            setTimeout(() => {
+                const tinySpark = document.createElement('div');
+                tinySpark.innerText = '💖💖💖';
+                tinySpark.style.position = 'fixed';
+                tinySpark.style.bottom = '10px';
+                tinySpark.style.right = '15px';
+                tinySpark.style.fontSize = '2rem';
+                tinySpark.style.opacity = '0.7';
+                tinySpark.style.zIndex = '999';
+                tinySpark.style.pointerEvents = 'none';
+                document.body.appendChild(tinySpark);
+                setTimeout(() => tinySpark.remove(), 1500);
+            }, 300);
+        });
+
+        // make sure the second video doesn't auto conflict with gift video, but all fine
+        // add extra bounce for gift box on load
+        const giftSvg = document.querySelector('.gift-box svg');
+        if (giftSvg) {
+            giftSvg.style.transition = 'transform 0.2s';
+            setInterval(() => {
+                if (!giftContainer.classList.contains('show-gift')) {
+                    giftSvg.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        if (giftSvg) giftSvg.style.transform = 'scale(1)';
+                    }, 400);
+                }
+            }, 1800);
+        }
+    })();
+</script>
+</body>
+</html>
